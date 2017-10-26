@@ -26,3 +26,10 @@ def set_properties(project, logger):
         "some_console1 = some_module1:some_function1",
         "some_console2 = some_package.some_module2:some_function2"])
 ```
+
+Properties
+----------
+
+| Name | Type | Default Value | Description |
+| --- | --- | --- | --- |
+| cram_generate_console_scripts | bool | True | Generate console scripts into target scripts directory for testing by Cram tests |
