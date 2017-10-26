@@ -8,10 +8,10 @@ use_plugin("python.pylint")
 use_plugin("python.coverage")
 use_plugin("python.distutils")
 use_plugin("python.unittest")
+use_plugin('pypi:pybuilder_semver_git_tag')
 
 
 name = "pybuilder_cram_console_scripts"
-version = '1.0.0'
 authors = [Author('Alexey Sanko', 'alexeycount@gmail.com')]
 url = 'https://github.com/AlexeySanko/pybuilder_cram_console_scripts'
 description = 'Please visit {0} for more information!'.format(url)
