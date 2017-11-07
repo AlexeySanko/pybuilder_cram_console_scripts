@@ -1,7 +1,6 @@
 sudo: false
 language: python
 python:
-- '2.6'
 - '2.7'
 - '3.4'
 - '3.5'
@@ -9,11 +8,29 @@ python:
 - '3.7-dev'
 - 'pypy'
 - 'pypy3'
-branches:
-  only:
-  - master
 install:
   - pip install pybuilder
   - pyb install_dependencies --verbose
 script:
   - pyb --debug
+deploy:
+  - provider: pypi
+    user: AlexeySanko
+    server: https://upload.pypi.org/legacy/
+    password:
+      secure: S0X6ryEfTazexHD77P7Qd+i8CDHRZVC/m/HvlniuQcLDpGFOvLWzK1u6g86cdNc/fwgqVkAnRjgT7Wisz9gsDoDV+frCyEzQNCrtKQ6aw4CJ+/hTbFvuoZ5WfzSyL5r34Jm+whXSM29vi1R2/bnkSRoUMV4b0iQ+TDIs7Wv0YdgNHG9eUPSenGaioua5G9YhuWtGTwCm1GcUp8ukAnMYJOaET67EOOFKlZEhA0xs4cH2fIMfuIG69Nn1X7b4QGEe+bC2i3ipBHcUo7uGtmWHFkbFaBueGEEI0s+km3x7e5zPFl8Wh1jMRE2HZMYW4bJPKPcwe6CdKx3Kgn4uEkA2MqgB+e0aAgLad2ru9KtjuFwx+LPvOyphdGWkr50Mf3sZWOT9arC51CaWC0Jzx7Rvz/IBk/qzzEUT5D38mRDf4F2/7yzQRiTM2I2RMMoYhM6fh4mp483FHPyDQMt5ChotHFF0Jy9NtJCPhmJT/CNQzThifjovOdbwveeXFIjjsjGXUIrhmQnX27jpkaPFqdFxufSCRE4x9i+EzjAl9R833ZcPW/jCiOSHcRYyIINaaVRFBnCa2Gb2kIbpqrFm/iUVLbE78oIU21pGISanIHXbHy0J42KIXEkaXaDiV2Lb4OOMQbGmKO2VoTxepA4pqpxqLhAdMaLITWa+AK6hwzXvK6E=
+    on:
+      tags: true
+      python: '2.7'
+      repo: AlexeySanko/pybuilder_cram_console_scripts
+    distributions: bdist_wheel
+  - provider: pypi
+    user: AlexeySanko
+    server: https://upload.pypi.org/legacy/
+    password:
+      secure: S0X6ryEfTazexHD77P7Qd+i8CDHRZVC/m/HvlniuQcLDpGFOvLWzK1u6g86cdNc/fwgqVkAnRjgT7Wisz9gsDoDV+frCyEzQNCrtKQ6aw4CJ+/hTbFvuoZ5WfzSyL5r34Jm+whXSM29vi1R2/bnkSRoUMV4b0iQ+TDIs7Wv0YdgNHG9eUPSenGaioua5G9YhuWtGTwCm1GcUp8ukAnMYJOaET67EOOFKlZEhA0xs4cH2fIMfuIG69Nn1X7b4QGEe+bC2i3ipBHcUo7uGtmWHFkbFaBueGEEI0s+km3x7e5zPFl8Wh1jMRE2HZMYW4bJPKPcwe6CdKx3Kgn4uEkA2MqgB+e0aAgLad2ru9KtjuFwx+LPvOyphdGWkr50Mf3sZWOT9arC51CaWC0Jzx7Rvz/IBk/qzzEUT5D38mRDf4F2/7yzQRiTM2I2RMMoYhM6fh4mp483FHPyDQMt5ChotHFF0Jy9NtJCPhmJT/CNQzThifjovOdbwveeXFIjjsjGXUIrhmQnX27jpkaPFqdFxufSCRE4x9i+EzjAl9R833ZcPW/jCiOSHcRYyIINaaVRFBnCa2Gb2kIbpqrFm/iUVLbE78oIU21pGISanIHXbHy0J42KIXEkaXaDiV2Lb4OOMQbGmKO2VoTxepA4pqpxqLhAdMaLITWa+AK6hwzXvK6E=
+    on:
+      tags: true
+      python: '3.6'
+      repo: AlexeySanko/pybuilder_cram_console_scripts
+    distributions: bdist_wheel
