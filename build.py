@@ -8,7 +8,10 @@ use_plugin("python.pylint")
 use_plugin("python.coverage")
 use_plugin("python.distutils")
 use_plugin("python.unittest")
+use_plugin("filter_resources")
+# third party plugins
 use_plugin('pypi:pybuilder_semver_git_tag')
+use_plugin('pypi:pybuilder_pylint_extended')
 
 
 name = "pybuilder_cram_console_scripts"
@@ -19,6 +22,15 @@ license = 'Apache License, Version 2.0'
 summary = 'PyBuilder Cram Console Scripts Plugin'
 
 default_task = ['clean', 'analyze', 'publish']
+
+
+@init
+def filter_settings(project):
+    # filter target files
+    project.set_property('filter_resources_target', '$dir_dist')
+    # provide verions and other properties
+    project.get_property("filter_resources_glob").append(
+        "%s/__init__.py" % name)
 
 
 @init
@@ -42,6 +54,9 @@ def set_properties(project):
 
     # pylint
     project.set_property("pylint_options", ["--max-line-length=80"])
+
+    # semver git tag
+    project.set_property('semver_git_tag_changelog', 'CHANGELOG.md')
 
     # distutils
     project.set_property('distutils_commands', ['bdist_wheel'])

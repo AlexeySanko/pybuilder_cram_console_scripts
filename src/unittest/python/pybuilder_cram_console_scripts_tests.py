@@ -98,6 +98,7 @@ class CramCSPluginGeneratorTests(TestCase):
         self.project.set_property('cram_run_test_from_target', True)
         self.project.set_property('dir_dist', 'target/dist/some_pkg')
         self.project.set_property('dir_dist_scripts', 'my_scripts')
+        self.project.set_property('cram_generate_console_scripts_dir', 'gen')
         self.project.set_property(
             'distutils_console_scripts', TEST_CONSOLE_SCRIPTS)
         logger_mock = Mock()
@@ -114,6 +115,7 @@ class CramCSPluginGeneratorTests(TestCase):
         self.project.set_property('cram_run_test_from_target', True)
         self.project.set_property('dir_dist', 'target/dist/some_pkg')
         self.project.set_property('dir_dist_scripts', 'my_scripts')
+        self.project.set_property('cram_generate_console_scripts_dir', 'gen')
         self.project.set_property(
             'distutils_entry_points',
             {'console_scripts': TEST_CONSOLE_SCRIPTS})
@@ -137,7 +139,8 @@ class CramCSPluginGeneratorWithTmpTests(TestCase):
         self.project.set_property('cram_run_test_from_target', True)
         self.project.set_property('dir_dist', 'target')
         self.project.set_property('dir_dist_scripts', 'my_scripts')
-        trgt_dir = os.path.join(self.tmp_dir, 'target', 'my_scripts')
+        self.project.set_property('cram_generate_console_scripts_dir', 'gen')
+        trgt_dir = os.path.join(self.tmp_dir, 'target', 'my_scripts', 'gen')
         os.makedirs(trgt_dir)
         self.project.set_property(
             'distutils_console_scripts', TEST_CONSOLE_SCRIPTS)

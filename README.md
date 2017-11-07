@@ -33,3 +33,4 @@ Properties
 | Name | Type | Default Value | Description |
 | --- | --- | --- | --- |
 | cram_generate_console_scripts | bool | True | Generate console scripts into target scripts directory for testing by Cram tests |
+| cram_generate_console_scripts_dir | str | generated | Sub-directory name of `target/dist/scripts` for generated scripts |
