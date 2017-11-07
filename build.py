@@ -4,7 +4,6 @@ use_plugin("python.core")
 use_plugin("python.install_dependencies")
 use_plugin("python.flake8")
 use_plugin("python.frosted")
-use_plugin("python.pylint")
 use_plugin("python.coverage")
 use_plugin("python.distutils")
 use_plugin("python.unittest")
@@ -46,14 +45,10 @@ def set_properties(project):
     # flake8
     project.set_property('flake8_verbose_output', True)
     project.set_property('flake8_break_build', True)
-    project.set_property('flake8_max_line_length', 80)
 
     # frosted
     project.set_property("frosted_break_build", True)
     project.set_property("frosted_include_test_sources", True)
-
-    # pylint
-    project.set_property("pylint_options", ["--max-line-length=80"])
 
     # semver git tag
     project.set_property('semver_git_tag_changelog', 'CHANGELOG.md')
