@@ -25,11 +25,11 @@ from pybuilder.core import before, init, use_plugin
 from pybuilder.errors import BuildFailedException
 from pybuilder.plugins.python import cram_plugin
 
-from pybuilder_cram_console_scripts.version import __version__
+from pybuilder_cram_console_scripts import version
 
 
 __author__ = 'Alexey Sanko'
-__version__ = __version__
+__version__ = version.__version__
 
 use_plugin("python.core")
 use_plugin("python.cram")
