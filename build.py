@@ -29,7 +29,7 @@ def filter_settings(project):
     project.set_property('filter_resources_target', '$dir_dist')
     # provide verions and other properties
     project.get_property("filter_resources_glob").append(
-        "%s/__init__.py" % name)
+        "%s/version.py" % name)
 
 
 @init

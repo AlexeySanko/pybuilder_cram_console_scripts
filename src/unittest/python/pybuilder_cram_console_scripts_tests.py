@@ -89,7 +89,7 @@ class CramCSPluginGeneratorTests(TestCase):
         self.assertRaises(BuildFailedException, generate_cram_console_scripts,
                           self.project, Mock())
 
-    @patch("pybuilder_cram_console_scripts.utils.ScriptMaker.make_multiple")
+    @patch("pybuilder_cram_console_scripts.ScriptMaker.make_multiple")
     def test_should_parse_distutils_console_scripts(    # pylint: disable=invalid-name
             self, mock_make_multiple):
         """
@@ -106,7 +106,7 @@ class CramCSPluginGeneratorTests(TestCase):
         mock_make_multiple.assert_called_once_with(TEST_CONSOLE_SCRIPTS)
         self.assertEqual(logger_mock.debug.call_count, 2)
 
-    @patch("pybuilder_cram_console_scripts.utils.ScriptMaker.make_multiple")
+    @patch("pybuilder_cram_console_scripts.ScriptMaker.make_multiple")
     def test_should_parse_distutils_entry_points(   # pylint: disable=invalid-name
             self, mock_make_multiple):
         """

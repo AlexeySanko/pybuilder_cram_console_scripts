@@ -18,13 +18,18 @@
     Plugin which extends PyBuilder Cram plugin with console scripts usage
     based on distutils plugin properties
 """
-from pybuilder.core import before, init, use_plugin
+from os import environ, path
 
-from pybuilder_cram_console_scripts import utils
+from pip._vendor.distlib.scripts import ScriptMaker
+from pybuilder.core import before, init, use_plugin
+from pybuilder.errors import BuildFailedException
+from pybuilder.plugins.python import cram_plugin
+
+from pybuilder_cram_console_scripts.version import __version__
 
 
 __author__ = 'Alexey Sanko'
-__version__ = "${dist_version}"
+__version__ = __version__
 
 use_plugin("python.core")
 use_plugin("python.cram")
@@ -43,4 +48,32 @@ def initialize_cram_console_scripts(project):
 @before("run_integration_tests")
 def generate_cram_console_scripts(project, logger):
     """ Generate console scripts according distutils properties"""
-    utils.generate_cram_console_scripts(project, logger)
+    # "cram_run_test_from_target" with True is needed
+    if not project.get_property('cram_run_test_from_target'):
+        raise BuildFailedException(
+            "Please enable cram_run_test_from_target property "
+            "or disable plugin cram_console_scripts")
+    logger.debug("Generating console scripts.")
+    # get list of console scripts from distutils properties
+    if project.get_property('distutils_console_scripts'):
+        console_scripts = project.get_property('distutils_console_scripts')
+    elif (project.get_property('distutils_entry_points')
+          and ('console_scripts' in
+               project.get_property('distutils_entry_points'))):
+        console_scripts = (
+            project.get_property(
+                'distutils_entry_points')['console_scripts'])
+    else:
+        raise BuildFailedException(
+            "Please provide console scripts with distutils_console_scripts "
+            "or with distutils_entry_points `console_scripts` section. "
+            "Or disable plugin cram_console_scripts")
+    generated_script_dir_dist = path.join(
+        project.expand_path("$dir_dist"),
+        project.get_property('dir_dist_scripts'),
+        project.get_property('cram_generate_console_scripts_dir'))
+    maker = ScriptMaker(None, generated_script_dir_dist)
+    generated_console_scripts = maker.make_multiple(console_scripts)
+    cram_plugin._prepend_path(environ, "PATH", generated_script_dir_dist)   # pylint: disable=protected-access
+    logger.debug(
+        "Generated console scripts: %s" % generated_console_scripts)
